@@ -1,0 +1,19 @@
+Holmes sat.
+N	V
+Holmes lit a pipe.
+N	V  D  N
+We arrived the day before Thursday.
+N	V  D	N    P		N
+Holmes sat in the red armchair and he chuckled.
+N	v  P  D   Adj	N	Con N	V
+My companion smiled an enigmatical smile. Holmes chuckled to himself.
+D	N	V   D	Adj	    N	    N	   V	  P	N
+She never said a word until we were at the door here.
+N    Adv   V   D  N    Conj N   V   P	D   N 	 Adv
+Holmes sat down and lit his pipe.
+N	V   Adv  Con V	D    N
+I had a country walk on Thursday and came home in a dreadful mess.
+N V   D	 Adj	N    P	 N	 Con	V  N   P D   Adj	N
+I had a little moist red paint in the palm of my hand.
+N  V  D	 Adj	Adj   Adj N	P D	N  P D  N
+

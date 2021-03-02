@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html class="wf-ptsans-n4-active wf-ptsans-n7-active wf-active" lang="en-us"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta property="og:description" content="This course explores the concepts and algorithms at the foundation of modern artificial intelligence, diving into the ideas that give rise to technologies like game-playing engines, handwriting recognition, and machine translation. Through hands-on projects, students gain exposure to the theory behind graph search algorithms, classification, optimization, reinforcement learning, and other topics in artificial intelligence and machine learning as they incorporate them into their own Python programs. By course's end, students emerge with experience in libraries for machine learning as well as knowledge of artificial intelligence principles that enable them to design intelligent systems of their own.">
+
+<meta property="og:image" content="https://img.youtube.com/vi/TA5ZJm1ZYS4/maxresdefault.jpg"><meta property="og:title" content="Project 6b: Questions - CS50's Introduction to Artificial Intelligence with Python"><link href="https://cs50.harvard.edu/ai/2020/favicon.ico?1609379526" rel="icon">
+
+<!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+<script src="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/webfont.js"></script>
+
+<!-- http://getbootstrap.com/docs/4.5/getting-started/introduction/ -->
+<script src="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/jquery.js"></script>
+<script src="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap.js"></script>
+
+<!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+<link href="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap-table.css" rel="stylesheet">
+<script src="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap-table.js"></script>
+<script src="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap-table-mobile.js"></script>
+
+<!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+<link href="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/all.css" rel="stylesheet">
+
+<!-- https://moment.github.io/luxon/ -->
+<script src="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/luxon.js"></script>
+
+<!-- http://docs.mathjax.org/ -->
+<!-- https://www.jsdelivr.com/package/npm/mathjax?path=es5 -->
+<script crossorigin="anonymous" integrity="sha256-+nfSJ1LiSvANSK3wvi6FjM+oFwoIQvURU1frozp5z6o=" src="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/tex-chtml.js"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style>
+
+
+
+<link href="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/page.css" rel="stylesheet">
+<link rel="stylesheet" href="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/css.css" media="all"><script src="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/jekyll-theme-cs50.js"></script>
+
+<script>
+    window.CS50 = {
+        locale: "en",
+        tz: "America/New_York"
+    };
+</script>
+
+<title>Project 6b: Questions - CS50's Introduction to Artificial Intelligence with Python</title>
+<style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+    <body class="">
+
+        
+        
+        
+        <div class="alert alert-dismissible fixed-top mb-0 rounded-0 shadow alert-success" data-alert="success" id="alert" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button><p>Interested in <a href="https://cs50.harvard.edu/ai/2020/#how-to-take-this-course" class="alert-link">a verified certificate, a professional certificate, or transfer credit and accreditation</a>?</p></div>
+        
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-md" style="height: 550.5px; top: 50.5px;">
+ 
+                    <header><h1 data-id="cs50s-introduction-to-artificial-intelligence-with-python"><a href="https://cs50.harvard.edu/ai/2020/">CS50’s Introduction to Artificial Intelligence with Python</a></h1>
+
+<p>OpenCourseWare</p>
+
+<p><a href="https://community.alumni.harvard.edu/give/59206872" class="pr-1 small">Donate</a>
+<a href="https://community.alumni.harvard.edu/give/59206872" class="small"><i aria-hidden="true" class="fas fa-external-link-alt"></i></a></p>
+
+<p><a href="https://brianyu.me/">Brian Yu</a><br>
+<a href="mailto:brian@cs.harvard.edu">brian@cs.harvard.edu</a></p>
+
+<p><a href="https://cs.harvard.edu/malan/">David J. Malan</a><br>
+<a href="mailto:malan@harvard.edu">malan@harvard.edu</a><br>
+<a href="https://www.facebook.com/dmalan" class="mr-2"><i class="fab fa-facebook-f"></i></a><a href="https://github.com/dmalan" class="mr-2"><i class="fab fa-github"></i></a><a href="https://www.instagram.com/davidjmalan/" class="mr-2"><i class="fab fa-instagram"></i></a><a href="https://www.linkedin.com/in/malan/" class="mr-2"><i class="fab fa-linkedin"></i></a><a href="https://www.quora.com/profile/David-J-Malan" class="mr-2"><i class="fab fa-quora"></i></a><a href="https://www.reddit.com/user/davidjmalan" class="mr-2"><i class="fab fa-reddit-alien"></i></a><a href="https://twitter.com/davidjmalan" class="mr-2"><i class="fab fa-twitter"></i></a></p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-md-none" data-target="aside &gt; nav" data-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-md-block" id="nav"><hr>
+
+<ol start="0">
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/0/">Search</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/1/">Knowledge</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/2/">Uncertainty</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/3/">Optimization</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/4/">Learning</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/5/">Neural Networks</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/6/">Language</a></li>
+</ol>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/2020/honesty/">Academic Honesty</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/2020/certificate/">CS50 Certificate</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/2020/faqs/">FAQs</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/ed">Ed Discussion</a> for Q&amp;A</li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://us.edstem.org/quickstart/ed-discussion.pdf">Quick Start Guide</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/ai">edX</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://itunes.apple.com/us/course/cs50s-introduction-to-artificial-intelligence-with-python/id1505432709">iTunes U</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.youtube.com/playlist?list=PLhQjrBD2T382Nz7z1AEXmioc27axa19Kv">YouTube</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.noticeable.io/">Changelog</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.statuspage.io/">Status Page</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/2020/communities/">Communities</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://discord.gg/cs50">Discord</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.facebook.com/groups/cs50/">Facebook Group</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.facebook.com/cs50/">Facebook Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://github.com/cs50">GitHub</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://gitter.im/cs50/x">Gitter</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://instagram.com/cs50">Instagram</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.linkedin.com/groups/7437240/">LinkedIn Group</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.linkedin.com/school/CS50/">LinkedIn Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.quora.com/topic/CS50">Quora</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.reddit.com/r/cs50/">Reddit</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/slack">Slack</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.snapchat.com/add/cs50">Snapchat</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://soundcloud.com/cs50">SoundCloud</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://twitter.com/cs50">Twitter</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="http://www.youtube.com/subscription_center?add_user=cs50tv">YouTube</a></li>
+</ul>
+
+<hr>
+
+<p><a href="https://cs50.harvardshop.com/"><img src="Project%206b%20Questions%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/GGMdcKt.png" alt="Harvard Shop"></a></p>
+
+<hr>
+
+<p><a href="https://cs50.harvard.edu/ai/2020/license/" class="small"><i class="fab fa-creative-commons mr-1"></i>License</a></p></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-md" style="margin-bottom: 0px; margin-top: 50.5px;">
+
+                    <a data-id="" id="project-6b-questions" style="top: -50.5px;"></a><h1><a data-id="" href="#project-6b-questions">Project 6b: Questions</a></h1>
+
+<p>Write an AI to answer questions.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python questions.py corpus
+Query: What are the types of supervised learning?
+Types of supervised learning algorithms include Active learning , classification and regression.
+
+$ python questions.py corpus
+Query: When was Python 3.0 released?
+Python 3.0 was released on 3 December 2008.
+
+$ python questions.py corpus
+Query: How do neurons connect in a neural network?
+Neurons of one layer connect only to neurons of the immediately preceding and immediately following layers.
+</code></pre></div></div>
+
+<a data-id="" id="when-to-do-it" style="top: -50.5px;"></a><h2><a data-id="" href="#when-to-do-it">When to Do It</a></h2>
+
+<p>By <span data-local="2021-12-31T11:59:00-05:00" data-boundary="window" data-toggle="tooltip" data-trigger="focus" title="" data-original-title="Greenwich Mean Time" class="text-nowrap" tabindex="0">Fri, Dec 31, 2021, 4:59 PM GMT</span>.</p>
+
+<a data-id="" id="how-to-get-help" style="top: -50.5px;"></a><h2><a data-id="" href="#how-to-get-help">How to Get Help</a></h2>
+
+<ol>
+  <li>Ask questions on Ed!</li>
+  <li>Ask questions on CS50’s various online fora!</li>
+</ol>
+
+<a data-id="" id="background" style="top: -50.5px;"></a><h2><a data-id="" href="#background">Background</a></h2>
+
+<p>Question Answering (QA) is a field within natural language processing
+ focused on designing systems that can answer questions. Among the more 
+famous question answering systems is <a href="https://en.wikipedia.org/wiki/Watson_(computer)">Watson</a>, the IBM computer that competed (and won) on <em>Jeopardy!</em>.
+ A question answering system of Watson’s accuracy requires enormous 
+complexity and vast amounts of data, but in this problem, we’ll design a
+ very simple question answering system based on inverse document 
+frequency.</p>
+
+<p>Our question answering system will perform two tasks: document 
+retrieval and passage retrieval. Our system will have access to a corpus
+ of text documents. When presented with a query (a question in English 
+asked by the user), document retrieval will first identify which 
+document(s) are most relevant to the query. Once the top documents are 
+found, the top document(s) will be subdivided into passages (in this 
+case, sentences) so that the most relevant passage to the question can 
+be determined.</p>
+
+<p>How do we find the most relevant documents and passages? To find the 
+most relevant documents, we’ll use tf-idf to rank documents based both 
+on term frequency for words in the query as well as inverse document 
+frequency for words in the query. Once we’ve found the most relevant 
+documents, there <a href="https://groups.csail.mit.edu/infolab/publications/Tellex-etal-SIGIR03.pdf">many possible metrics</a>
+ for scoring passages, but we’ll use a combination of inverse document 
+frequency and a query term density measure (described in the 
+Specification).</p>
+
+<p>More sophisticated question answering systems might employ other 
+strategies (analyzing the type of question word used, looking for 
+synonyms of query words, <a href="https://en.wikipedia.org/wiki/Lemmatisation">lemmatizing</a>
+ to handle different forms of the same word, etc.) but we’ll leave those
+ sorts of improvements as exercises for you to work on if you’d like to 
+after you’ve completed this project!</p>
+
+<a data-id="" id="getting-started" style="top: -50.5px;"></a><h2><a data-id="" href="#getting-started">Getting Started</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Download the distribution code from <a href="https://cdn.cs50.net/ai/2020/x/projects/6/questions.zip">https://cdn.cs50.net/ai/2020/x/projects/6/questions.zip</a> and unzip it.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Inside of the <code class="language-plaintext highlighter-rouge">questions</code> directory, run <code class="language-plaintext highlighter-rouge">pip3 install -r requirements.txt</code> to install this project’s dependency: <code class="language-plaintext highlighter-rouge">nltk</code> for natural language processing.</li>
+</ul>
+
+<a data-id="" id="understanding" style="top: -50.5px;"></a><h2><a data-id="" href="#understanding">Understanding</a></h2>
+
+<p>First, take a look at the documents in <code class="language-plaintext highlighter-rouge">corpus</code>.
+ Each is a text file containing the contents of a Wikipedia page. Our 
+goal is to write an AI that can find sentences from these files that are
+ relevant to a user’s query. You are welcome and encouraged to add, 
+remove, or modify files in the corpus if you’d like to experiment with 
+answering queries based on a different corpus of documents. Just be sure
+ each file in the corpus is a text file ending in <code class="language-plaintext highlighter-rouge">.txt</code>.</p>
+
+<p>Now, take a look at <code class="language-plaintext highlighter-rouge">questions.py</code>. The global variable <code class="language-plaintext highlighter-rouge">FILE_MATCHES</code> specifies how many files should be matched for any given query. The global variable <code class="language-plaintext highlighter-rouge">SENTENCES_MATCHES</code>
+ specifies how many sentences within those files should be matched for 
+any given query. By default, each of these values is 1: our AI will find
+ the top sentence from the top matching document as the answer to our 
+question. You are welcome and encouraged to experiment with changing 
+these values.</p>
+
+<p>In the <code class="language-plaintext highlighter-rouge">main</code> function, we first load the files from the corpus directory into memory (via the <code class="language-plaintext highlighter-rouge">load_files</code> function). Each of the files is then tokenized (via <code class="language-plaintext highlighter-rouge">tokenize</code>) into a list of words, which then allows us to compute inverse document frequency values for each of the words (via <code class="language-plaintext highlighter-rouge">compute_idfs</code>). The user is then prompted to enter a query. The <code class="language-plaintext highlighter-rouge">top_files</code> function identifies the files that are the best match for the query. From those files, sentences are extracted, and the <code class="language-plaintext highlighter-rouge">top_sentences</code> function identifies the sentences that are the best match for the query.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">load_files</code>, <code class="language-plaintext highlighter-rouge">tokenize</code>, <code class="language-plaintext highlighter-rouge">compute_idfs</code>, <code class="language-plaintext highlighter-rouge">top_files</code>, and <code class="language-plaintext highlighter-rouge">top_sentences</code> functions are left to you!</p>
+
+<a data-id="" id="specification" style="top: -50.5px;"></a><h2><a data-id="" href="#specification">Specification</a></h2>
+
+<div class="alert alert-warning" data-alert="warning" role="alert"><p>Beginning <strong>1 July 2020</strong>,
+ an automated tool will begin assisting the staff in enforcing the 
+constraints in the below specification. Your submission will fail if any
+ of these are not handled properly or if you modify functions other than
+ as permitted.</p></div>
+
+<p>Complete the implementation of <code class="language-plaintext highlighter-rouge">load_files</code>, <code class="language-plaintext highlighter-rouge">tokenize</code>, <code class="language-plaintext highlighter-rouge">compute_idfs</code>, <code class="language-plaintext highlighter-rouge">top_files</code>, and <code class="language-plaintext highlighter-rouge">top_sentences</code> in <code class="language-plaintext highlighter-rouge">questions.py</code>.</p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <code class="language-plaintext highlighter-rouge">load_files</code> function should accept the name of a <code class="language-plaintext highlighter-rouge">directory</code> and return a dictionary mapping the filename of each <code class="language-plaintext highlighter-rouge">.txt</code> file inside that directory to the file’s contents as a string.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Your
+ function should be platform-independent: that is to say, it should work
+ regardless of operating system. Note that on macOS, the <code class="language-plaintext highlighter-rouge">/</code> character is used to separate path components, while the <code class="language-plaintext highlighter-rouge">\</code> character is used on Windows. Use <a href="https://docs.python.org/3/library/os.html"><code class="language-plaintext highlighter-rouge">os.sep</code></a> and <a href="https://docs.python.org/3/library/os.path.html#os.path.join"><code class="language-plaintext highlighter-rouge">os.path.join</code></a> as needed instead of using your platform’s specific separator character.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In the returned dictionary, there should be one key named for each <code class="language-plaintext highlighter-rouge">.txt</code> file in the directory. The value associated with that key should be a string (the result of <code class="language-plaintext highlighter-rouge">read</code>ing the corresonding file).</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Each key should be just the filename, without including the directory name. For example, if the directory is called <code class="language-plaintext highlighter-rouge">corpus</code> and contains files <code class="language-plaintext highlighter-rouge">a.txt</code> and <code class="language-plaintext highlighter-rouge">b.txt</code>, the keys should be <code class="language-plaintext highlighter-rouge">a.txt</code> and <code class="language-plaintext highlighter-rouge">b.txt</code> and not <code class="language-plaintext highlighter-rouge">corpus/a.txt</code> and <code class="language-plaintext highlighter-rouge">corpus/b.txt</code>.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <code class="language-plaintext highlighter-rouge">tokenize</code> function should accept a <code class="language-plaintext highlighter-rouge">document</code> (a string) as input, and return a list of all of the words in that document, in order and lowercased.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You should use <code class="language-plaintext highlighter-rouge">nltk</code>’s <a href="https://www.nltk.org/api/nltk.tokenize.html#nltk.tokenize.punkt.PunktLanguageVars.word_tokenize"><code class="language-plaintext highlighter-rouge">word_tokenize</code></a> function to perform tokenization.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>All words in the returned list should be lowercased.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Filter
+ out punctuation and stopwords (common words that are unlikely to be 
+useful for querying). Punctuation is defined as any character in <code class="language-plaintext highlighter-rouge">string.punctuation</code> (after you <code class="language-plaintext highlighter-rouge">import string</code>). Stopwords are defined as any word in <code class="language-plaintext highlighter-rouge">nltk.corpus.stopwords.words("english")</code>.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>If a word appears multiple times in the <code class="language-plaintext highlighter-rouge">document</code>, it should also appear multiple times in the returned list (unless it was filtered out).</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <code class="language-plaintext highlighter-rouge">compute_idfs</code> function should accept a dictionary of <code class="language-plaintext highlighter-rouge">documents</code> and return a new dictionary mapping words to their IDF (inverse document frequency) values.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Assume that <code class="language-plaintext highlighter-rouge">documents</code> will be a dictionary mapping names of documents to a list of words in that document.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The
+ returned dictionary should map every word that appears in at least one 
+of the documents to its inverse document frequency value.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Recall
+ that the inverse document frequency of a word is defined by taking the 
+natural logarithm of the number of documents divided by the number of 
+documents in which the word appears.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <code class="language-plaintext highlighter-rouge">top_files</code> function should, given a <code class="language-plaintext highlighter-rouge">query</code> (a set of words), <code class="language-plaintext highlighter-rouge">files</code> (a dictionary mapping names of files to a list of their words), and <code class="language-plaintext highlighter-rouge">idfs</code> (a dictionary mapping words to their IDF values), return a list of the filenames of the the <code class="language-plaintext highlighter-rouge">n</code> top files that match the query, ranked according to tf-idf.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The returned list of filenames should be of length <code class="language-plaintext highlighter-rouge">n</code> and should be ordered with the best match first.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Files
+ should be ranked according to the sum of tf-idf values for any word in 
+the query that also appears in the file. Words in the query that do not 
+appear in the file should not contribute to the file’s score.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Recall
+ that tf-idf for a term is computed by multiplying the number of times 
+the term appears in the document by the IDF value for that term.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You may assume that <code class="language-plaintext highlighter-rouge">n</code> will not be greater than the total number of files.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <code class="language-plaintext highlighter-rouge">top_sentences</code> function should, given a <code class="language-plaintext highlighter-rouge">query</code> (a set of words), <code class="language-plaintext highlighter-rouge">sentences</code> (a dictionary mapping sentences to a list of their words), and <code class="language-plaintext highlighter-rouge">idfs</code> (a dictionary mapping words to their IDF values), return a list of the <code class="language-plaintext highlighter-rouge">n</code> top sentences that match the query, ranked according to IDF.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The returned list of sentences should be of length <code class="language-plaintext highlighter-rouge">n</code> and should be ordered with the best match first.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Sentences
+ should be ranked according to “matching word measure”: namely, the sum 
+of IDF values for any word in the query that also appears in the 
+sentence. Note that term frequency should not be taken into account 
+here, only inverse document frequency.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>If
+ two sentences have the same value according to the matching word 
+measure, then sentences with a higher “query term density” should be 
+preferred. Query term density is defined as the proportion of words in 
+the sentence that are also words in the query. For example, if a 
+sentence has 10 words, 3 of which are in the query, then the sentence’s 
+query term density is <code class="language-plaintext highlighter-rouge">0.3</code>.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You may assume that <code class="language-plaintext highlighter-rouge">n</code> will not be greater than the total number of sentences.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>You should not modify anything else in <code class="language-plaintext highlighter-rouge">questions.py</code>
+ other than the functions the specification calls for you to implement, 
+though you may write additional functions, add new global constant 
+variables, and/or import other Python standard library modules.</p>
+
+<a data-id="" id="hints" style="top: -50.5px;"></a><h2><a data-id="" href="#hints">Hints</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In the <code class="language-plaintext highlighter-rouge">compute_idfs</code> function, recall that the <code class="language-plaintext highlighter-rouge">documents</code>
+ input will be represented as a dictionary mapping document names to a 
+list of words in each of those documents. The document names themselves 
+are irrelevant to the calculation of IDF values. That is to say, 
+changing any or all of the document names should not change the IDF 
+values that are computed.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Different
+ sources may use different formulas to calculate term frequency and 
+inverse document frequency than the ones described in lecture and given 
+in this specification. Be sure that the formulas you implement are the 
+ones described in this specification.</li>
+</ul>
+
+<a data-id="" id="how-to-submit" style="top: -50.5px;"></a><h2><a data-id="" href="#how-to-submit">How to Submit</a></h2>
+
+<div class="alert alert-warning" data-alert="warning" role="alert"><p>Effective <strong>1 July 2020</strong>, your submission must be structured exactly as follows:</p>
+
+<p>You may not have your code in your <code class="language-plaintext highlighter-rouge">ai50/projects/2020/x/questions</code> branch nested within any further subdirectories (such as a subdirectory called <code class="language-plaintext highlighter-rouge">questions</code> or <code class="language-plaintext highlighter-rouge">project6b</code>). That is to say, if the staff attempts to access <code class="language-plaintext highlighter-rouge">https://github.com/me50/USERNAME/blob/ai50/projects/2020/x/questions/questions.py</code>, where <code class="language-plaintext highlighter-rouge">USERNAME</code>
+ is your GitHub username, that is exactly where your file should live. 
+If your file is not at that location when the staff attempts to grade, 
+your submission will fail.</p></div>
+
+<ol>
+  <li>Visit <a href="https://submit.cs50.io/invites/8f7fa48876984cda98a73ba53bcf01fd">this link</a>, log in with your GitHub account, and click <strong>Authorize cs50</strong>. Then, check the box indicating that you’d like to grant course staff access to your submissions, and click <strong>Join course</strong>.</li>
+  <li><a href="https://git-scm.com/downloads">Install Git</a> and, optionally, <a href="https://cs50.readthedocs.io/submit50/">install <code class="language-plaintext highlighter-rouge">submit50</code></a>.</li>
+  <li>If you’ve installed <code class="language-plaintext highlighter-rouge">submit50</code>, execute
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>submit50 ai50/projects/2020/x/questions
+</code></pre></div>    </div>
+    <p>Otherwise, using Git, push your work to <code class="language-plaintext highlighter-rouge">https://github.com/me50/USERNAME.git</code>, where <code class="language-plaintext highlighter-rouge">USERNAME</code> is your GitHub username, on a branch called <code class="language-plaintext highlighter-rouge">ai50/projects/2020/x/questions</code>.</p>
+  </li>
+  <li><a href="https://www.howtogeek.com/205742/how-to-record-your-windows-mac-linux-android-or-ios-screen/">Record a screencast not to exceed 5 minutes in length</a>
+ in which you demonstrate your project’s functionality. Be certain that 
+every element of the specification, above, is demonstrated in your 
+video. There’s no need to show your code, just your application in 
+action; we’ll review your code on GitHub. <a href="https://www.youtube.com/upload">Upload that video to YouTube</a> (as unlisted or public, but not private) or somewhere else.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><strong>VIDEO NOTE</strong>: Your video <em>must</em> demonstrate you asking your AI at least two (2) questions beyond those described at the top of this specification.</li>
+    </ul>
+  </li>
+  <li>Submit <a href="https://forms.cs50.io/830cce17-d3c2-43ea-a09a-91cf4dad253a">this form</a>.</li>
+</ol>
+
+<p>You can then go to <a href="https://cs50.me/cs50ai">https://cs50.me/cs50ai</a> to view your current progress!</p>
+
+<div class="alert alert-primary" data-alert="primary" role="alert"><p><strong>IMPORTANT</strong>
+ note regarding your gradebook at &lt;cs50.me/cs50ai&gt;! Soon after the
+ start of each calendar year (we estimate during the week of 11 January 
+2021), we typically refresh all of our gradebooks. <em>All of your work from 2020 will be saved and will carry forward</em>,
+ but your gradebook may appear temporarily empty or unavailable until 
+you have submitted work in 2021 that has been graded and returned to you
+ by CS50 Bot. So don’t be alarmed!</p>
+
+<p>If you finish CS50AI during the final days of December 2020, it is 
+very important that you claim your free CS50 Certificate before this 
+gradebook reset takes place, so don’t delay! (Verified certificates are 
+unaffected by this.)</p></div>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+    
+
+
+</body></html>

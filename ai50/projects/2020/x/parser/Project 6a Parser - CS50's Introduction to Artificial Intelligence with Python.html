@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html class="wf-ptsans-n4-active wf-ptsans-n7-active wf-active" lang="en-us"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta property="og:description" content="This course explores the concepts and algorithms at the foundation of modern artificial intelligence, diving into the ideas that give rise to technologies like game-playing engines, handwriting recognition, and machine translation. Through hands-on projects, students gain exposure to the theory behind graph search algorithms, classification, optimization, reinforcement learning, and other topics in artificial intelligence and machine learning as they incorporate them into their own Python programs. By course's end, students emerge with experience in libraries for machine learning as well as knowledge of artificial intelligence principles that enable them to design intelligent systems of their own.">
+
+<meta property="og:image" content="https://img.youtube.com/vi/TA5ZJm1ZYS4/maxresdefault.jpg"><meta property="og:title" content="Project 6a: Parser - CS50's Introduction to Artificial Intelligence with Python"><link href="https://cs50.harvard.edu/ai/2020/favicon.ico?1609379526" rel="icon">
+
+<!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+<script src="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/webfont.js"></script>
+
+<!-- http://getbootstrap.com/docs/4.5/getting-started/introduction/ -->
+<script src="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/jquery.js"></script>
+<script src="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap.js"></script>
+
+<!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+<link href="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap-table.css" rel="stylesheet">
+<script src="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap-table.js"></script>
+<script src="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap-table-mobile.js"></script>
+
+<!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+<link href="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/all.css" rel="stylesheet">
+
+<!-- https://moment.github.io/luxon/ -->
+<script src="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/luxon.js"></script>
+
+<!-- http://docs.mathjax.org/ -->
+<!-- https://www.jsdelivr.com/package/npm/mathjax?path=es5 -->
+<script crossorigin="anonymous" integrity="sha256-+nfSJ1LiSvANSK3wvi6FjM+oFwoIQvURU1frozp5z6o=" src="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/tex-chtml.js"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style>
+
+
+
+<link href="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/page.css" rel="stylesheet">
+<link rel="stylesheet" href="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/css.css" media="all"><script src="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/jekyll-theme-cs50.js"></script>
+
+<script>
+    window.CS50 = {
+        locale: "en",
+        tz: "America/New_York"
+    };
+</script>
+
+<title>Project 6a: Parser - CS50's Introduction to Artificial Intelligence with Python</title>
+<style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+    <body class="">
+
+        
+        
+        
+        <div class="alert alert-dismissible fixed-top mb-0 rounded-0 shadow alert-success" data-alert="success" id="alert" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button><p>Interested in <a href="https://cs50.harvard.edu/ai/2020/#how-to-take-this-course" class="alert-link">a verified certificate, a professional certificate, or transfer credit and accreditation</a>?</p></div>
+        
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-md" style="height: 551px; top: 50px;">
+ 
+                    <header><h1 data-id="cs50s-introduction-to-artificial-intelligence-with-python"><a href="https://cs50.harvard.edu/ai/2020/">CS50’s Introduction to Artificial Intelligence with Python</a></h1>
+
+<p>OpenCourseWare</p>
+
+<p><a href="https://community.alumni.harvard.edu/give/59206872" class="pr-1 small">Donate</a>
+<a href="https://community.alumni.harvard.edu/give/59206872" class="small"><i aria-hidden="true" class="fas fa-external-link-alt"></i></a></p>
+
+<p><a href="https://brianyu.me/">Brian Yu</a><br>
+<a href="mailto:brian@cs.harvard.edu">brian@cs.harvard.edu</a></p>
+
+<p><a href="https://cs.harvard.edu/malan/">David J. Malan</a><br>
+<a href="mailto:malan@harvard.edu">malan@harvard.edu</a><br>
+<a href="https://www.facebook.com/dmalan" class="mr-2"><i class="fab fa-facebook-f"></i></a><a href="https://github.com/dmalan" class="mr-2"><i class="fab fa-github"></i></a><a href="https://www.instagram.com/davidjmalan/" class="mr-2"><i class="fab fa-instagram"></i></a><a href="https://www.linkedin.com/in/malan/" class="mr-2"><i class="fab fa-linkedin"></i></a><a href="https://www.quora.com/profile/David-J-Malan" class="mr-2"><i class="fab fa-quora"></i></a><a href="https://www.reddit.com/user/davidjmalan" class="mr-2"><i class="fab fa-reddit-alien"></i></a><a href="https://twitter.com/davidjmalan" class="mr-2"><i class="fab fa-twitter"></i></a></p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-md-none" data-target="aside &gt; nav" data-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-md-block" id="nav"><hr>
+
+<ol start="0">
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/0/">Search</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/1/">Knowledge</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/2/">Uncertainty</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/3/">Optimization</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/4/">Learning</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/5/">Neural Networks</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/6/">Language</a></li>
+</ol>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/2020/honesty/">Academic Honesty</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/2020/certificate/">CS50 Certificate</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/2020/faqs/">FAQs</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/ed">Ed Discussion</a> for Q&amp;A</li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://us.edstem.org/quickstart/ed-discussion.pdf">Quick Start Guide</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/ai">edX</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://itunes.apple.com/us/course/cs50s-introduction-to-artificial-intelligence-with-python/id1505432709">iTunes U</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.youtube.com/playlist?list=PLhQjrBD2T382Nz7z1AEXmioc27axa19Kv">YouTube</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.noticeable.io/">Changelog</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.statuspage.io/">Status Page</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/2020/communities/">Communities</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://discord.gg/cs50">Discord</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.facebook.com/groups/cs50/">Facebook Group</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.facebook.com/cs50/">Facebook Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://github.com/cs50">GitHub</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://gitter.im/cs50/x">Gitter</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://instagram.com/cs50">Instagram</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.linkedin.com/groups/7437240/">LinkedIn Group</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.linkedin.com/school/CS50/">LinkedIn Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.quora.com/topic/CS50">Quora</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.reddit.com/r/cs50/">Reddit</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/slack">Slack</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.snapchat.com/add/cs50">Snapchat</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://soundcloud.com/cs50">SoundCloud</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://twitter.com/cs50">Twitter</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="http://www.youtube.com/subscription_center?add_user=cs50tv">YouTube</a></li>
+</ul>
+
+<hr>
+
+<p><a href="https://cs50.harvardshop.com/"><img src="Project%206a%20Parser%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/GGMdcKt.png" alt="Harvard Shop"></a></p>
+
+<hr>
+
+<p><a href="https://cs50.harvard.edu/ai/2020/license/" class="small"><i class="fab fa-creative-commons mr-1"></i>License</a></p></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-md" style="margin-bottom: 0px; margin-top: 50px;">
+
+                    <a data-id="" id="project-6a-parser" style="top: -50px;"></a><h1><a data-id="" href="#project-6a-parser">Project 6a: Parser</a></h1>
+
+<p>Write an AI to parse sentences and extract noun phrases.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python parser.py
+Sentence: Holmes sat.
+        S
+   _____|___
+  NP        VP
+  |         |
+  N         V
+  |         |
+holmes     sat
+
+Noun Phrase Chunks
+holmes
+</code></pre></div></div>
+
+<a data-id="" id="when-to-do-it" style="top: -50px;"></a><h2><a data-id="" href="#when-to-do-it">When to Do It</a></h2>
+
+<p>By <span data-local="2021-12-31T11:59:00-05:00" data-boundary="window" data-toggle="tooltip" data-trigger="focus" title="" data-original-title="Greenwich Mean Time" class="text-nowrap" tabindex="0">Fri, Dec 31, 2021, 4:59 PM GMT</span>.</p>
+
+<a data-id="" id="how-to-get-help" style="top: -50px;"></a><h2><a data-id="" href="#how-to-get-help">How to Get Help</a></h2>
+
+<ol>
+  <li>Ask questions on Ed!</li>
+  <li>Ask questions on CS50’s various online fora!</li>
+</ol>
+
+<a data-id="" id="background" style="top: -50px;"></a><h2><a data-id="" href="#background">Background</a></h2>
+
+<p>A common task in natural language processing is parsing, the process 
+of determining the structure of a sentence. This is useful for a number 
+of reasons: knowing the structure of a sentence can help a computer to 
+better understand the meaning of the sentence, and it can also help the 
+computer extract information out of a sentence. In particular, it’s 
+often useful to extract noun phrases out of a sentence to get an 
+understanding for what the sentence is about.</p>
+
+<p>In this problem, we’ll use the context-free grammar formalism to 
+parse English sentences to determine their structure. Recall that in a 
+context-free grammar, we repeatedly apply rewriting rules to transform 
+symbols into other symbols. The objective is to start with a nonterminal
+ symbol <code class="language-plaintext highlighter-rouge">S</code> 
+(representing a sentence) and repeatedly apply context-free grammar 
+rules until we generate a complete sentence of terminal symbols (i.e., 
+words). The rule <code class="language-plaintext highlighter-rouge">S -&gt; N V</code>, for example, means that the <code class="language-plaintext highlighter-rouge">S</code> symbol can be rewritten as <code class="language-plaintext highlighter-rouge">N V</code> (a noun followed by a verb). If we also have the rule <code class="language-plaintext highlighter-rouge">N -&gt; "Holmes"</code> and the rule <code class="language-plaintext highlighter-rouge">V -&gt; "sat"</code>, we can generate the complete sentence <code class="language-plaintext highlighter-rouge">"Holmes sat."</code>.</p>
+
+<p>Of course, noun phrases might not always be as simple as a single word like <code class="language-plaintext highlighter-rouge">"Holmes"</code>. We might have noun phrases like <code class="language-plaintext highlighter-rouge">"my companion"</code> or <code class="language-plaintext highlighter-rouge">"a country walk"</code> or <code class="language-plaintext highlighter-rouge">"the day before Thursday"</code>, which require more complex rules to account for. To account for the phrase <code class="language-plaintext highlighter-rouge">"my companion"</code>, for example, we might imagine a rule like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NP -&gt; N | Det N
+</code></pre></div></div>
+
+<p>In this rule, we say that an <code class="language-plaintext highlighter-rouge">NP</code> (a “noun phrase”) could be either just a noun (<code class="language-plaintext highlighter-rouge">N</code>) or a determiner (<code class="language-plaintext highlighter-rouge">Det</code>) followed by a noun, where determiners include words like <code class="language-plaintext highlighter-rouge">"a"</code>, <code class="language-plaintext highlighter-rouge">"the"</code>, and <code class="language-plaintext highlighter-rouge">"my"</code>. The vertical bar (<code class="language-plaintext highlighter-rouge">|</code>) just indicates that there are multiple possible ways to rewrite an <code class="language-plaintext highlighter-rouge">NP</code>, with each possible rewrite separated by a bar.</p>
+
+<p>To incorporate this rule into how we parse a sentence (<code class="language-plaintext highlighter-rouge">S</code>), we’ll also need to modify our <code class="language-plaintext highlighter-rouge">S -&gt; N V</code> rule to allow for noun phrases (<code class="language-plaintext highlighter-rouge">NP</code>s)
+ as the subject of our sentence. See how? And to account for more 
+complex types of noun phrases, we may need to modify our grammar even 
+further.</p>
+
+<a data-id="" id="getting-started" style="top: -50px;"></a><h2><a data-id="" href="#getting-started">Getting Started</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Download the distribution code from <a href="https://cdn.cs50.net/ai/2020/x/projects/6/parser.zip">https://cdn.cs50.net/ai/2020/x/projects/6/parser.zip</a> and unzip it.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Inside of the <code class="language-plaintext highlighter-rouge">parser</code> directory, run <code class="language-plaintext highlighter-rouge">pip3 install -r requirements.txt</code> to install this project’s dependency: <code class="language-plaintext highlighter-rouge">nltk</code> for natural language processing.</li>
+</ul>
+
+<a data-id="" id="understanding" style="top: -50px;"></a><h2><a data-id="" href="#understanding">Understanding</a></h2>
+
+<p>First, look at the text files in the <code class="language-plaintext highlighter-rouge">sentences</code>
+ directory. Each file contains an English sentence. Your goal in this 
+problem is to write a parser that is able to parse all of these 
+sentences.</p>
+
+<p>Take a look now at <code class="language-plaintext highlighter-rouge">parser.py</code>,
+ and notice the context free grammar rules defined at the top of the 
+file. We’ve already defined for you a set of rules for generating 
+terminal symbols (in the global variable <code class="language-plaintext highlighter-rouge">TERMINALS</code>). Notice that <code class="language-plaintext highlighter-rouge">Adj</code> is a nonterminal symbol that generates adjectives, <code class="language-plaintext highlighter-rouge">Adv</code> generates adverbs, <code class="language-plaintext highlighter-rouge">Conj</code> generates conjunctions, <code class="language-plaintext highlighter-rouge">Det</code> generates determiners, <code class="language-plaintext highlighter-rouge">N</code> generates nouns (spread across multiple lines for readability), <code class="language-plaintext highlighter-rouge">P</code> generates prepositions, and <code class="language-plaintext highlighter-rouge">V</code> generates verbs.</p>
+
+<p>Next is the definition of <code class="language-plaintext highlighter-rouge">NONTERMINALS</code>,
+ which will contain all of the context-free grammar rules for generating
+ nonterminal symbols. Right now, there’s just a single rule: <code class="language-plaintext highlighter-rouge">S -&gt; N V</code>. With just that rule, we can generate sentences like <code class="language-plaintext highlighter-rouge">"Holmes arrived."</code> or <code class="language-plaintext highlighter-rouge">"He chuckled."</code>, but not sentences more complex than that. Editing the <code class="language-plaintext highlighter-rouge">NONTERMINALS</code> rules so that all of the sentences can be parsed will be up to you!</p>
+
+<p>Next, take a look at the <code class="language-plaintext highlighter-rouge">main</code> function. It first accepts a sentence as input, either from a file or via user input. The sentence is preprocessed (via the <code class="language-plaintext highlighter-rouge">preprocess</code>
+ function) and then parsed according to the context-free grammar defined
+ by the file. The resulting trees are printed out, and all of the “noun 
+phrase chunks” (defined in the Specification) are printed as well (via 
+the <code class="language-plaintext highlighter-rouge">np_chunk</code> function).</p>
+
+<p>In addition to writing context-free grammar rules for parsing these sentences, the <code class="language-plaintext highlighter-rouge">preprocess</code> and <code class="language-plaintext highlighter-rouge">np_chunk</code> functions are left up to you!</p>
+
+<a data-id="" id="specification" style="top: -50px;"></a><h2><a data-id="" href="#specification">Specification</a></h2>
+
+<div class="alert alert-warning" data-alert="warning" role="alert"><p>Beginning <strong>1 July 2020</strong>,
+ an automated tool will begin assisting the staff in enforcing the 
+constraints in the below specification. Your submission will fail if any
+ of these are not handled properly or if you modify functions other than
+ as permitted.</p></div>
+
+<p>Complete the implementation of <code class="language-plaintext highlighter-rouge">preprocess</code> and <code class="language-plaintext highlighter-rouge">np_chunk</code>, and complete the context-free grammar rules defined in <code class="language-plaintext highlighter-rouge">NONTERMINALS</code>.</p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <code class="language-plaintext highlighter-rouge">preprocess</code> function should accept a <code class="language-plaintext highlighter-rouge">sentence</code> as input and return a lowercased list of its words.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You may assume that <code class="language-plaintext highlighter-rouge">sentence</code> will be a string.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You should use <code class="language-plaintext highlighter-rouge">nltk</code>’s <a href="https://www.nltk.org/api/nltk.tokenize.html#nltk.tokenize.punkt.PunktLanguageVars.word_tokenize"><code class="language-plaintext highlighter-rouge">word_tokenize</code></a> function to perform tokenization.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Your function should return a list of words, where each word is a lowercased string.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Any word that doesn’t contain at least one alphabetic character (e.g. <code class="language-plaintext highlighter-rouge">.</code> or <code class="language-plaintext highlighter-rouge">28</code>) should be excluded from the returned list.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <code class="language-plaintext highlighter-rouge">NONTERMINALS</code> global variable should be replaced with a set of context-free grammar rules that, when combined with the rules in <code class="language-plaintext highlighter-rouge">TERMINALS</code>, allow the parsing of all sentences in the <code class="language-plaintext highlighter-rouge">sentences/</code> directory.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Each rules must be on its own line. Each rule must include the <code class="language-plaintext highlighter-rouge">-&gt;</code> characters to denote which symbol is being replaced, and may optionally include <code class="language-plaintext highlighter-rouge">|</code> symbols if there are multiple ways to rewrite a symbol.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You do not need to keep the existing rule <code class="language-plaintext highlighter-rouge">S -&gt; N V</code> in your solution, but your first rule must begin with <code class="language-plaintext highlighter-rouge">S -&gt;</code> since <code class="language-plaintext highlighter-rouge">S</code> (representing a sentence) is the starting symbol.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You may add as many nonterminal symbols as you would like.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Use the nonterminal symbol <code class="language-plaintext highlighter-rouge">NP</code> to represent a “noun phrase”, such as the subject of a sentence.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <code class="language-plaintext highlighter-rouge">np_chunk</code> function should accept a <code class="language-plaintext highlighter-rouge">tree</code> representing the syntax of a sentence, and return a list of all of the noun phrase chunks in that sentence.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For
+ this problem, a “noun phrase chunk” is defined as a noun phrase that 
+doesn’t contain other noun phrases within it. Put more formally, a noun 
+phrase chunk is a subtree of the original tree whose label is <code class="language-plaintext highlighter-rouge">NP</code> and that does not itself contain other noun phrases as subtrees.
+        <ul class="fa-ul">
+          <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For example, if <code class="language-plaintext highlighter-rouge">"the home"</code> is a noun phrase chunk, then <code class="language-plaintext highlighter-rouge">"the armchair in the home"</code> is not a noun phrase chunk, because the latter contains the former as a subtree.</li>
+        </ul>
+      </li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You may assume that the input will be a <code class="language-plaintext highlighter-rouge">nltk.tree</code> object whose label is <code class="language-plaintext highlighter-rouge">S</code> (that is to say, the input will be a tree representing a sentence).</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Your function should return a list of <code class="language-plaintext highlighter-rouge">nltk.tree</code> objects, where each element has the label <code class="language-plaintext highlighter-rouge">NP</code>.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You will likely find the documentation for <a href="https://www.nltk.org/_modules/nltk/tree.html"><code class="language-plaintext highlighter-rouge">nltk.tree</code></a> helpful for identifying how to manipulate a <code class="language-plaintext highlighter-rouge">nltk.tree</code> object.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>You should not modify anything else in <code class="language-plaintext highlighter-rouge">parser.py</code>
+ other than the functions the specification calls for you to implement, 
+though you may write additional functions and/or import other Python 
+standard library modules. You will need to modify the definition of <code class="language-plaintext highlighter-rouge">NONTERMINALS</code>, but you should not modify the definition of <code class="language-plaintext highlighter-rouge">TERMINALS</code>.</p>
+
+<a data-id="" id="hints" style="top: -50px;"></a><h2><a data-id="" href="#hints">Hints</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>It’s
+ to be expected that your parser may generate some sentences that you 
+believe are not syntactically or semantically well-formed. You need not 
+worry, therefore, if your parser allows for parsing meaningless 
+sentences like <code class="language-plaintext highlighter-rouge">"His Thursday chuckled in a paint."</code>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>That
+ said, you should avoid over-generation of sentences where possible. For
+ example, your parser should definitely not accept sentences like <code class="language-plaintext highlighter-rouge">"Armchair on the sat Holmes."</code></li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You should also avoid under-generation of sentences. A rule like <code class="language-plaintext highlighter-rouge">S -&gt; N V Det Adj Adj Adj N P Det N P Det N</code> would technically successfully generate sentence 10, but not in a way that is particularly useful or generalizable.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The
+ rules in the lecture source code are (intentionally) a very simplified 
+rule set, and as a result may suffer from over-generation. You can (and 
+should) make modifications to those rules to try to be as general as 
+possible without over-generating. In particular, consider how you might 
+get your parser to accept the sentence “Holmes sat in the armchair.” 
+(and “Holmes sat in the red armchair.” and “Holmes sat in the little red
+ armchair.”), but have it <em>not</em> accept the sentence “Holmes sat in the the armchair.”</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>It’s to be expected that your parser may generate multiple ways to parse a sentence. English grammar is inherently ambiguous!</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Within the <a href="https://www.nltk.org/_modules/nltk/tree.html"><code class="language-plaintext highlighter-rouge">nltk.tree</code></a> documentation, you may find the <code class="language-plaintext highlighter-rouge">label</code> and <code class="language-plaintext highlighter-rouge">subtrees</code> functions particularly useful.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>To focus on testing your parser before working on noun phrase chunking, it may be helpful to temporarily have <code class="language-plaintext highlighter-rouge">np_chunk</code> simply return an empty list <code class="language-plaintext highlighter-rouge">[]</code>, so that your program can operate without noun phrase chunking while you test the other parts of your program.</li>
+</ul>
+
+<a data-id="" id="how-to-submit" style="top: -50px;"></a><h2><a data-id="" href="#how-to-submit">How to Submit</a></h2>
+
+<div class="alert alert-warning" data-alert="warning" role="alert"><p>Effective <strong>1 July 2020</strong>, your submission must be structured exactly as follows:</p>
+
+<p>You may not have your code in your <code class="language-plaintext highlighter-rouge">ai50/projects/2020/x/parser</code> branch nested within any further subdirectories (such as a subdirectory called <code class="language-plaintext highlighter-rouge">parser</code> or <code class="language-plaintext highlighter-rouge">project6a</code>). That is to say, if the staff attempts to access <code class="language-plaintext highlighter-rouge">https://github.com/me50/USERNAME/blob/ai50/projects/2020/x/parser/parser.py</code>, where <code class="language-plaintext highlighter-rouge">USERNAME</code>
+ is your GitHub username, that is exactly where your file should live. 
+If your file is not at that location when the staff attempts to grade, 
+your submission will fail.</p></div>
+
+<ol>
+  <li>Visit <a href="https://submit.cs50.io/invites/8f7fa48876984cda98a73ba53bcf01fd">this link</a>, log in with your GitHub account, and click <strong>Authorize cs50</strong>. Then, check the box indicating that you’d like to grant course staff access to your submissions, and click <strong>Join course</strong>.</li>
+  <li><a href="https://git-scm.com/downloads">Install Git</a> and, optionally, <a href="https://cs50.readthedocs.io/submit50/">install <code class="language-plaintext highlighter-rouge">submit50</code></a>.</li>
+  <li>If you’ve installed <code class="language-plaintext highlighter-rouge">submit50</code>, execute
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>submit50 ai50/projects/2020/x/parser
+</code></pre></div>    </div>
+    <p>Otherwise, using Git, push your work to <code class="language-plaintext highlighter-rouge">https://github.com/me50/USERNAME.git</code>, where <code class="language-plaintext highlighter-rouge">USERNAME</code> is your GitHub username, on a branch called <code class="language-plaintext highlighter-rouge">ai50/projects/2020/x/parser</code>.</p>
+  </li>
+  <li><a href="https://www.howtogeek.com/205742/how-to-record-your-windows-mac-linux-android-or-ios-screen/">Record a screencast not to exceed 5 minutes in length</a>
+ in which you demonstrate your project’s functionality. Be certain that 
+every element of the specification, above, is demonstrated in your 
+video. There’s no need to show your code, just your application in 
+action; we’ll review your code on GitHub. <a href="https://www.youtube.com/upload">Upload that video to YouTube</a> (as unlisted or public, but not private) or somewhere else.</li>
+  <li>Submit <a href="https://forms.cs50.io/6c78d83a-f244-45a6-9804-17776c0a1ea2">this form</a>.</li>
+</ol>
+
+<p>You can then go to <a href="https://cs50.me/cs50ai">https://cs50.me/cs50ai</a> to view your current progress!</p>
+
+<div class="alert alert-primary" data-alert="primary" role="alert"><p><strong>IMPORTANT</strong>
+ note regarding your gradebook at &lt;cs50.me/cs50ai&gt;! Soon after the
+ start of each calendar year (we estimate during the week of 11 January 
+2021), we typically refresh all of our gradebooks. <em>All of your work from 2020 will be saved and will carry forward</em>,
+ but your gradebook may appear temporarily empty or unavailable until 
+you have submitted work in 2021 that has been graded and returned to you
+ by CS50 Bot. So don’t be alarmed!</p>
+
+<p>If you finish CS50AI during the final days of December 2020, it is 
+very important that you claim your free CS50 Certificate before this 
+gradebook reset takes place, so don’t delay! (Verified certificates are 
+unaffected by this.)</p></div>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+    
+
+
+</body></html>

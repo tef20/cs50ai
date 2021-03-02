@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta property="og:description" content="This course explores the concepts and algorithms at the foundation of modern artificial intelligence, diving into the ideas that give rise to technologies like game-playing engines, handwriting recognition, and machine translation. Through hands-on projects, students gain exposure to the theory behind graph search algorithms, classification, optimization, reinforcement learning, and other topics in artificial intelligence and machine learning as they incorporate them into their own Python programs. By course's end, students emerge with experience in libraries for machine learning as well as knowledge of artificial intelligence principles that enable them to design intelligent systems of their own.">
+
+<meta property="og:image" content="https://img.youtube.com/vi/TA5ZJm1ZYS4/maxresdefault.jpg"><meta property="og:title" content="Knights - CS50's Introduction to Artificial Intelligence with Python"><link href="https://cs50.harvard.edu/ai/2020/favicon.ico?1603304737" rel="icon">
+
+<!-- http://getbootstrap.com/docs/4.5/getting-started/introduction/ -->
+<script src="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/jquery.js"></script>
+<script src="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/popper.js"></script>
+<script src="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap.js"></script>
+
+<!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+<link href="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap-table.css" rel="stylesheet">
+<script src="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap-table.js"></script>
+<script src="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/bootstrap-table-mobile.js"></script>
+
+<!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+<link href="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/all.css" rel="stylesheet">
+
+<!-- https://momentjs.com/, https://momentjs.com/timezone/ -->
+<script src="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/moment.js"></script>
+<script src="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/moment-timezone-with-data.js"></script>
+<script src="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/luxon.js"></script>
+
+
+
+<link href="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/page.css" rel="stylesheet">
+<script src="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/jekyll-theme-cs50.js"></script>
+
+<title>Knights - CS50's Introduction to Artificial Intelligence with Python</title>
+</head>
+
+    <body>
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-md" style="height: 601px; top: 0px;">
+ 
+                    <header><h1 data-id="cs50sintroduction-to-artificial-intelligence-with-python"><a href="https://cs50.harvard.edu/ai/2020/">CS50’s<br>Introduction to Artificial Intelligence with Python</a></h1>
+
+<p>OpenCourseWare</p>
+
+<p><a href="https://brianyu.me/">Brian Yu</a><br>
+<a href="mailto:brian@cs.harvard.edu">brian@cs.harvard.edu</a></p>
+
+<p><a href="https://cs.harvard.edu/malan/">David J. Malan</a><br>
+<a href="mailto:malan@harvard.edu">malan@harvard.edu</a><br>
+<a href="https://www.facebook.com/dmalan" class="mr-2"><i class="fab fa-facebook-f"></i></a><a href="https://github.com/dmalan" class="mr-2"><i class="fab fa-github"></i></a><a href="https://www.instagram.com/davidjmalan/" class="mr-2"><i class="fab fa-instagram"></i></a><a href="https://www.linkedin.com/in/malan/" class="mr-2"><i class="fab fa-linkedin"></i></a><a href="https://www.quora.com/profile/David-J-Malan" class="mr-2"><i class="fab fa-quora"></i></a><a href="https://www.reddit.com/user/davidjmalan" class="mr-2"><i class="fab fa-reddit-alien"></i></a><a href="https://twitter.com/davidjmalan" class="mr-2"><i class="fab fa-twitter"></i></a></p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-md-none" data-target="aside &gt; nav" data-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-md-block" id="nav"><hr>
+
+<ol start="0">
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/0/">Search</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/1/">Knowledge</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/2/">Uncertainty</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/3/">Optimization</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/4/">Learning</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/5/">Neural Networks</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/2020/weeks/6/">Language</a></li>
+</ol>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/2020/certificate/">CS50 Certificate</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/2020/faqs/">FAQs</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/ai/ed">Ed Discussion</a> for Q&amp;A</li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://us.edstem.org/quickstart/ed-discussion.pdf">Quick Start Guide</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/ai">edX</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://itunes.apple.com/us/course/cs50s-introduction-to-artificial-intelligence-with-python/id1505432709">iTunes U</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.youtube.com/playlist?list=PLhQjrBD2T382Nz7z1AEXmioc27axa19Kv">YouTube</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.noticeable.io/">Changelog</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.statuspage.io/">Status Page</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>
+    <p><a href="https://cs50.harvard.edu/ai/2020/communities/">Communities</a></p>
+  </li>
+</ul>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://discord.gg/cs50">Discord</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.facebook.com/groups/cs50/">Facebook Group</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.facebook.com/cs50/">Facebook Page</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://github.com/cs50">GitHub</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://gitter.im/cs50/x">Gitter</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://instagram.com/cs50">Instagram</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.linkedin.com/groups/7437240/">LinkedIn Group</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.linkedin.com/school/CS50/">LinkedIn Page</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.quora.com/topic/CS50">Quora</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/slack">Slack</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.snapchat.com/add/cs50">Snapchat</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://twitter.com/cs50">Twitter</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="http://www.youtube.com/subscription_center?add_user=cs50tv">YouTube</a></li>
+</ul>
+
+<hr>
+
+<p><a href="https://cs50.harvardshop.com/"><img src="Knights%20-%20CS50's%20Introduction%20to%20Artificial%20Intelligence%20with%20Python_files/GGMdcKt.png" alt="Harvard Shop"></a></p>
+
+<hr>
+
+<p><a href="https://cs50.harvard.edu/ai/2020/license/" class="small"><i class="fab fa-creative-commons mr-1"></i>License</a></p></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-md markdown-body" style="margin-bottom: 0px; margin-top: 0px;">
+
+                    <a data-id="" id="knights" style="top: 0px;"></a><h1><a data-id="" href="#knights">Knights</a></h1>
+
+<p>Write a program to solve logic puzzles.</p>
+
+<a data-id="" id="when-to-do-it" style="top: 0px;"></a><h2><a data-id="" href="#when-to-do-it">When to Do It</a></h2>
+
+<p>By <span data-local="2020-12-31T23:59:00-05:00" data-boundary="window" data-toggle="tooltip" data-trigger="focus" title="" data-original-title="Friday, 1 January 2021, 04:59 Greenwich Mean Time" class="text-nowrap" tabindex="0">Fri, 1 Jan 2021, 04:59 GMT</span>.</p>
+
+<a data-id="" id="how-to-get-help" style="top: 0px;"></a><h2><a data-id="" href="#how-to-get-help">How to Get Help</a></h2>
+
+<ol>
+  <li>Ask questions on Ed!</li>
+  <li>Ask questions on CS50’s various online fora!</li>
+</ol>
+
+<a data-id="" id="background" style="top: 0px;"></a><h2><a data-id="" href="#background">Background</a></h2>
+
+<p>In 1978, logician Raymond Smullyan published “What is the name of 
+this book?”, a book of logical puzzles. Among the puzzles in the book 
+were a class of puzzles that Smullyan called “Knights and Knaves” 
+puzzles.</p>
+
+<p>In a Knights and Knaves puzzle, the following information is given: 
+Each character is either a knight or a knave. A knight will always tell 
+the truth: if knight states a sentence, then that sentence is true. 
+Conversely, a knave will always lie: if a knave states a sentence, then 
+that sentence is false.</p>
+
+<p>The objective of the puzzle is, given a set of sentences spoken by 
+each of the characters, determine, for each character, whether that 
+character is a knight or a knave.</p>
+
+<p>For example, consider a simple puzzle with just a single character named A. A says “I am both a knight and a knave.”</p>
+
+<p>Logically, we might reason that if A were a knight, then that 
+sentence would have to be true. But we know that the sentence cannot 
+possibly be true, because A cannot be both a knight and a knave – we 
+know that each character is either a knight or a knave, but not both. 
+So, we could conclude, A must be a knave.</p>
+
+<p>That puzzle was on the simpler side. With more characters and more 
+sentences, the puzzles can get trickier! Your task in this problem is to
+ determine how to represent these puzzles using propositional logic, 
+such that an AI running a model-checking algorithm could solve these 
+puzzles for us.</p>
+
+<a data-id="" id="getting-started" style="top: 0px;"></a><h2><a data-id="" href="#getting-started">Getting Started</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Download the distribution code from <a href="https://cdn.cs50.net/ai/2020/x/projects/1/knights.zip">https://cdn.cs50.net/ai/2020/x/projects/1/knights.zip</a> and unzip it.</li>
+</ul>
+
+<a data-id="" id="understanding" style="top: 0px;"></a><h2><a data-id="" href="#understanding">Understanding</a></h2>
+
+<p>Take a look at <code class="highlighter-rouge">logic.py</code>, which
+ you may recall from Lecture 1. No need to understand everything in this
+ file, but notice that this file defines several classes for different 
+types of logical connectives. These classes can be composed within each 
+other, so an expression like <code class="highlighter-rouge">And(Not(A), Or(B, C))</code> represents the logical sentence stating that symbol <code class="highlighter-rouge">A</code> is not true, and that symbol <code class="highlighter-rouge">B</code> or symbol <code class="highlighter-rouge">C</code> is true (where “or” here refers to inclusive, not exclusive, or).</p>
+
+<p>Recall that <code class="highlighter-rouge">logic.py</code> also contains a function <code class="highlighter-rouge">model_check</code>. <code class="highlighter-rouge">model_check</code>
+ takes a knowledge base and a query. The knowledge base is a single 
+logical sentence: if multiple logical sentences are known, they can be 
+joined together in an <code class="highlighter-rouge">And</code> expression. <code class="highlighter-rouge">model_check</code> recursively considers all possible models, and returns <code class="highlighter-rouge">True</code> if the knowledge base entails the query, and returns <code class="highlighter-rouge">False</code> otherwise.</p>
+
+<p>Now, take a look at <code class="highlighter-rouge">puzzle.py</code>. At the top, we’ve defined six propositional symbols. <code class="highlighter-rouge">AKnight</code>, for example, represents the sentence that “A is a knight,” while <code class="highlighter-rouge">AKnave</code> represents the sentence that “A is a knave.” We’ve similarly defined propositional symbols for characters B and C as well.</p>
+
+<p>What follows are four different knowledge bases, <code class="highlighter-rouge">knowledge0</code>, <code class="highlighter-rouge">knowledge1</code>, <code class="highlighter-rouge">knowledge2</code>, and <code class="highlighter-rouge">knowledge3</code>,
+ which will contain the knowledge needed to deduce the solutions to the 
+upcoming Puzzles 0, 1, 2, and 3, respectively. Notice that, for now, 
+each of these knowledge bases is empty. That’s where you come in!</p>
+
+<p>The <code class="highlighter-rouge">main</code> function of this <code class="highlighter-rouge">puzzle.py</code>
+ loops over all puzzles, and uses model checking to compute, given the 
+knowledge for that puzzle, whether each character is a knight or a 
+knave, printing out any conclusions that the model checking algorithm is
+ able to make.</p>
+
+<a data-id="" id="specification" style="top: 0px;"></a><h2><a data-id="" href="#specification">Specification</a></h2>
+
+<div class="alert alert-warning" data-alert="warning" role="alert">
+  <p>Beginning <strong>1 July 2020</strong>, an automated tool will 
+begin assisting the staff in enforcing the constraints in the below 
+specification. Your submission will fail if any of these are not handled
+ properly or if you modify functions other than as permitted.</p>
+</div>
+
+<p>Add knowledge to knowledge bases <code class="highlighter-rouge">knowledge0</code>, <code class="highlighter-rouge">knowledge1</code>, <code class="highlighter-rouge">knowledge2</code>, and <code class="highlighter-rouge">knowledge3</code> to solve the following puzzles.</p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Puzzle 0 is the puzzle from the Background. It contains a single character, A.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>A says “I am both a knight and a knave.”</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Puzzle 1 has two characters: A and B.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>A says “We are both knaves.”</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>B says nothing.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Puzzle 2 has two characters: A and B.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>A says “We are the same kind.”</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>B says “We are of different kinds.”</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Puzzle 3 has three characters: A, B, and C.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>A says either “I am a knight.” or “I am a knave.”, but you don’t know which.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>B says “A said ‘I am a knave.’”</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>B then says “C is a knave.”</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>C says “A is a knight.”</li>
+    </ul>
+  </li>
+</ul>
+
+<p>In each of the above puzzles, each character is either a knight or a 
+knave. Every sentence spoken by a knight is true, and every sentence 
+spoken by a knave is false.</p>
+
+<p>Once you’ve completed the knowledge base for a problem, you should be able to run <code class="highlighter-rouge">python puzzle.py</code> to see the solution to the puzzle.</p>
+
+<a data-id="" id="hints" style="top: 0px;"></a><h2><a data-id="" href="#hints">Hints</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For
+ each knowledge base, you’ll likely want to encode two different types 
+of information: (1) information about the structure of the problem 
+itself (i.e., information given in the definition of a Knight and Knave 
+puzzle), and (2) information about what the characters actually said.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Consider
+ what it means if a sentence is spoken by a character. Under what 
+conditions is that sentence true? Under what conditions is that sentence
+ false? How can you express that as a logical sentence?</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>There
+ are multiple possible knowledge bases for each puzzle that will compute
+ the correct result. You should attempt to choose a knowledge base that 
+offers the most direct translation of the information in the puzzle, 
+rather than performing logical reasoning on your own. You should also 
+consider what the most concise representation of the information in the 
+puzzle would be.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For instance, for Puzzle 0, setting <code class="highlighter-rouge">knowledge0 = AKnave</code>
+ would result in correct output, since through our own reasoning we know
+ A must be a knave. But doing so would be against the spirit of this 
+problem: the goal is to have your AI do the reasoning for you.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>You should not need to (nor should you) modify <code class="highlighter-rouge">logic.py</code> at all to complete this problem.</li>
+</ul>
+
+<a data-id="" id="how-to-submit" style="top: 0px;"></a><h2><a data-id="" href="#how-to-submit">How to Submit</a></h2>
+
+<div class="alert alert-warning" data-alert="warning" role="alert">
+  <p>Effective <strong>1 July 2020</strong>, your submission must be structured exactly as follows:</p>
+
+<p>You may not have your code in your <code class="highlighter-rouge">ai50/projects/2020/x/knights</code> branch nested within any further subdirectories (such as a subdirectory called <code class="highlighter-rouge">knights</code> or <code class="highlighter-rouge">project1a</code>). That is to say, if the staff attempts to access <code class="highlighter-rouge">https://github.com/me50/USERNAME/blob/ai50/projects/2020/x/knights/puzzle.py</code>, where <code class="highlighter-rouge">USERNAME</code>
+ is your GitHub username, that is exactly where your file should live. 
+If your file is not at that location when the staff attempts to grade, 
+your submission will fail.</p>
+</div>
+
+<ol>
+  <li>Visit <a href="https://submit.cs50.io/invites/8f7fa48876984cda98a73ba53bcf01fd">this link</a>, log in with your GitHub account, and click <strong>Authorize cs50</strong>. Then, check the box indicating that you’d like to grant course staff access to your submissions, and click <strong>Join course</strong>.</li>
+  <li><a href="https://git-scm.com/downloads">Install Git</a> and, optionally, <a href="https://cs50.readthedocs.io/submit50/">install <code class="highlighter-rouge">submit50</code></a>.</li>
+  <li>If you’ve installed <code class="highlighter-rouge">submit50</code>, execute
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>submit50 ai50/projects/2020/x/knights
+</code></pre></div>    </div>
+    <p>Otherwise, using Git, push your work to <code class="highlighter-rouge">https://github.com/me50/USERNAME.git</code>, where <code class="highlighter-rouge">USERNAME</code> is your GitHub username, on a branch called <code class="highlighter-rouge">ai50/projects/2020/x/knights</code>.</p>
+  </li>
+  <li><a href="https://www.howtogeek.com/205742/how-to-record-your-windows-mac-linux-android-or-ios-screen/">Record a 1- to 5-minute screencast</a>
+ in which you demonstrate your project’s functionality. Be certain that 
+every element of the specification, above, is demonstrated in your 
+video. There’s no need to show your code, just your application in 
+action; we’ll review your code on GitHub. <a href="https://www.youtube.com/upload">Upload that video to YouTube</a> (as unlisted or public, but not private) or somewhere else.</li>
+  <li>Submit <a href="https://forms.cs50.io/8bf31a9b-0bfc-43a9-83d9-b8101b9b3855">this form</a>.</li>
+</ol>
+
+<p>You can then go to <a href="https://cs50.me/cs50ai">https://cs50.me/cs50ai</a> to view your current progress!</p>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+    
+
+
+</body></html>
